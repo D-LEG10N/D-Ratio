@@ -1,0 +1,29 @@
+AnchorLayoutExample:
+
+<AnchorLayoutExample>:
+    #right,left,center
+    anchor_x:"center"
+
+    #bottom,top,center
+    anchor_y:"center"
+    BoxLayout:
+
+        size_hint:0.5,0.8
+        orientation:"vertical"
+        spacing: "20dp"
+        Label:
+            text:'Select video below:  '
+        FileChooserIconView:
+            id:file_chooser
+            
+            pos_hint: { "center_x": .5 }
+            path: '/'
+            filters: [lambda folder, filename: folder in ['/home/user/Documents', '/home/user/Downloads']]
+            on_selection: root.on_file_select(self, self.selection)
+            filters:['*']
+
+        Label:
+            text: root.my_text
+        Button:
+            text:"Identify"
+            on_press:root.video_predictor('Videos/','slowfast')
